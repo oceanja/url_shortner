@@ -20,32 +20,34 @@ export default function Login({ setToken }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-6 rounded shadow w-80">
-        <h2 className="text-xl font-bold mb-4">Login</h2>
+  <div className="min-h-screen bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center">
+    <div className="bg-white p-10 rounded-2xl shadow-xl w-96">
 
-        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+      <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        URL Shortener 🚀
+      </h2>
 
-        <input
-          className="border p-2 w-full mb-2"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <input
+        className="w-full mb-4 p-3 rounded-lg border focus:ring-2 focus:ring-indigo-400 outline-none"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <input
-          className="border p-2 w-full mb-4"
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <input
+        type="password"
+        className="w-full mb-6 p-3 rounded-lg border focus:ring-2 focus:ring-indigo-400 outline-none"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <button
-          className="bg-blue-500 text-white w-full p-2"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-      </div>
+      <button
+        onClick={handleLogin}
+        className="w-full bg-indigo-600 text-white py-3 rounded-lg text-lg hover:bg-indigo-700 transition shadow"
+      >
+        Login
+      </button>
+
     </div>
-  );
+  </div>
+);
 }
