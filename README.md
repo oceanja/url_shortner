@@ -4,7 +4,7 @@ A modern full-stack URL Shortener built using **Node.js, Express, PostgreSQL, Re
 The application allows users to securely register, login, generate short URLs, manage them in a personal dashboard and track click analytics.
 
 ## 🎥 Demo Video
-Watch Here: https://drive.google.com/file/d/1fHGvr5mM_jZOaKtdlmC1phwx9VjXgggA/view?usp=sharing
+Watch Here: https://drive.google.com/file/d/1iOvAGrrkFqwT91P3Wmv_QdSppzJn3YkZ/view?usp=sharing
 
 ---
 
