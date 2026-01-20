@@ -3,6 +3,9 @@
 A modern full-stack URL Shortener built using **Node.js, Express, PostgreSQL, React, Tailwind CSS and JWT Authentication**.  
 The application allows users to securely register, login, generate short URLs, manage them in a personal dashboard and track click analytics.
 
+## 🎥 Demo Video
+Watch Here: https://drive.google.com/file/d/1fHGvr5mM_jZOaKtdlmC1phwx9VjXgggA/view?usp=sharing
+
 ---
 
 ## ✨ Features
