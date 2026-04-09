@@ -1,36 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+
+const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:9001";
 
 export default function Dashboard({ token, setToken }) {
   const [urls, setUrls] = useState([]);
   const [original, setOriginal] = useState("");
   const [error, setError] = useState("");
 
-  const fetchUrls = async () => {
-    try {
-      const res = await axios.get("http://127.0.0.1:9001/url/my", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setUrls(res.data);
-    } catch (err) {
-      setError("Unable to load URLs");
-    }
-  };
+  const loadUrls = useCallback(() => {
+    axios
+      .get(`${API}/url/my`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => setUrls(res.data))
+      .catch(() => setError("Unable to load URLs"));
+  }, [token]);
 
   useEffect(() => {
-    fetchUrls();
-  }, []);
+    loadUrls();
+  }, [loadUrls]);
 
   const createUrl = async () => {
     try {
       await axios.post(
-        "http://127.0.0.1:9001/url/shorten",
+        `${API}/url/shorten`,
         { original_url: original },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setOriginal("");
-      fetchUrls();          
-    } catch (err) {
+      loadUrls();
+    } catch {
       setError("Failed to shorten URL");
     }
   };
@@ -53,6 +51,10 @@ export default function Dashboard({ token, setToken }) {
           Logout
         </button>
       </div>
+
+      {error && (
+        <p className="text-red-500 text-sm mb-4">{error}</p>
+      )}
 
       <div className="flex gap-4 mb-8">
         <input
@@ -81,14 +83,14 @@ export default function Dashboard({ token, setToken }) {
               <tr key={u.short_code} className="border-t hover:bg-white transition">
                 <td className="p-4 flex gap-3 items-center">
                   <a
-                    href={`http://127.0.0.1:9001/${u.short_code}`}
+                    href={`${API}/${u.short_code}`}
                     className="text-indigo-600 font-semibold hover:underline"
                   >
                     {u.short_code}
                   </a>
                   <button
                     onClick={() =>
-                      navigator.clipboard.writeText(`http://127.0.0.1:9001/${u.short_code}`)
+                      navigator.clipboard.writeText(`${API}/${u.short_code}`)
                     }
                     className="bg-gray-200 text-xs px-2 py-1 rounded hover:bg-gray-300"
                   >

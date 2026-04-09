@@ -18,7 +18,7 @@ app.get("/", async (req, res) => {
   res.send(`DB Connected at ${result.rows[0].now}`);
 });
 
-const PORT = 9001;
+const PORT = process.env.PORT || 9001;
 app.listen(PORT, () => {
-  console.log(`Server running on http://127.0.0.1:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:9001";
+
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,13 +10,13 @@ export default function Login({ setToken }) {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://127.0.0.1:9001/auth/login", {
+      const res = await axios.post(`${API}/auth/login`, {
         email,
         password,
       });
       setToken(res.data.token);
       localStorage.setItem("token", res.data.token);
-    } catch (err) {
+    } catch {
       setError("Invalid email or password");
     }
   };
@@ -39,6 +41,10 @@ export default function Login({ setToken }) {
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
+
+      {error && (
+        <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+      )}
 
       <button
         onClick={handleLogin}
